@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar  from "../components/Navbar.astro";
+import Hero  from "../components/Hero.astro";
+import About  from "../components/About.astro";
+import Cta from "../components/Cta.astro";
+import Guide from "../components/Guide.astro";
+import Podcast from "../components/Podcast.astro";
+import Courses from "../components/Courses.astro";
+import Mainabout from "../components/Mainabout.astro";
+import Footer from "../components/Footer.astro";
+
+---
+
+<Layout title="Lead Forward">
+	<Navbar/>
+	
+	<main class="min-h-screen flex flex-col gap-8">
+		<Hero/>
+		<About/>
+		<Podcast/>
+		<Cta/>
+		<Guide/>
+		<Courses/>
+		<Mainabout/>
+	</main>
+
+	<Footer/>
+
+</Layout>

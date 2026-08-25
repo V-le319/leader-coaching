@@ -1,0 +1,17 @@
+---
+import '../styles/global.css';
+
+const {title = "Lead Forward"} = Astro.pros;
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+</head>
+<body class="bg-white flex flex-col min-h-dvh">
+ 
+  <slot />
+ 
+</body>
+</html>
