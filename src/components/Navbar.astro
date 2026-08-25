@@ -1,0 +1,77 @@
+---
+import Logo from "./Logo.astro";
+import Login from "./Login.astro"
+
+
+
+---
+<div id="navbar" class="w-full flex justify-between md:grid grid-cols-3 items-center p-4">
+    <Logo/>
+
+        <!--desktop -->
+    <div class="hidden md:flex flex-row gap-10 justify-center text-navy font-heading font-semibold text-base">
+        <a href="/#hero" class="hover:text-coral duration-300">Start Here</a>
+        <a href="/#cta" class="hover:text-coral duration-300">Book</a>
+        <a href="/#podcast" class="hover:text-coral duration-300">Podcast</a>
+        <a href="/#courses" class="hover:text-coral duration-300">Courses</a>
+        <a href="/#about" class="hover:text-coral duration-300">about</a>
+    </div>
+
+    <div class="hidden md:flex justify-end">
+        <Login/>
+    </div>
+
+        <!--mobile -->
+        <!--mobile -->
+<button id="menu-toggle" class="md:hidden text-2xl z-30 relative">
+   <span id="menu-icon">☰</span>
+</button>
+
+<!-- backdrop -->
+<div id="menu-backdrop" class="hidden fixed inset-0 bg-black/30 z-40"></div>
+
+<!-- slide-in panel -->
+<div id="mobile-menu"
+    class="hidden fixed top-0 right-0 h-dvh w-48 bg-navy text-white flex-col justify-center items-start gap-10 p-8 z-50 translate-x-full transition-transform duration-300">
+
+    <button id="menu-close" class="absolute top-4 right-4 text-2xl">✕</button>
+
+    <a href="/#hero" class="hover:text-coral duration-300">Start Here</a>
+    <a href="/#cta" class="hover:text-coral duration-300">Book</a>
+    <a href="/#podcast" class="hover:text-coral duration-300">Podcast</a>
+    <a href="/#courses" class="hover:text-coral duration-300">Courses</a>
+    <a href="/#about" class="hover:text-coral duration-300">About</a>
+
+    <button class="font-bold text-coral">Log In</button>
+</div>
+
+</div>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+const menu = document.getElementById('mobile-menu');
+const backdrop = document.getElementById('menu-backdrop');
+const closeBtn = document.getElementById('menu-close');
+
+function openMenu() {
+  menu?.classList.remove('hidden');
+  menu?.classList.add('flex');
+  backdrop?.classList.remove('hidden');
+  requestAnimationFrame(() => {
+    menu?.classList.remove('translate-x-full');
+  });
+}
+
+function closeMenu() {
+  menu?.classList.add('translate-x-full');
+  backdrop?.classList.add('hidden');
+  setTimeout(() => {
+    menu?.classList.add('hidden');
+    menu?.classList.remove('flex');
+  }, 300);
+}
+
+toggle?.addEventListener('click', openMenu);
+closeBtn?.addEventListener('click', closeMenu);
+backdrop?.addEventListener('click', closeMenu);
+</script>

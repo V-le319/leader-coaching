@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 
-const {title = "Lead Forward"} = Astro.pros;
+const {title = "Lead Forward"} = Astro.props;
 ---
 <html lang="en">
 <head>
@@ -9,7 +9,7 @@ const {title = "Lead Forward"} = Astro.pros;
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
 </head>
-<body class="bg-white flex flex-col min-h-dvh">
+<body class="bg-white flex flex-col min-h-dvh md:p-10">
  
   <slot />
  
