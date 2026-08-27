@@ -9,14 +9,16 @@ import Podcast from "../components/Podcast.astro";
 import Courses from "../components/Courses.astro";
 import Mainabout from "../components/Mainabout.astro";
 import Footer from "../components/Footer.astro";
+import Statbar from "../components/Statbar.astro";
 
 ---
 
 <Layout title="Lead Forward">
 	<Navbar/>
 	
-	<main class="min-h-screen flex flex-col gap-8 ">
+	<main class="min-h-screen flex flex-col gap-2 ">
 		<Hero/>
+		<Statbar/>
 		<About/>
 		<Podcast/>
 		<Cta/>
