@@ -1,8 +1,24 @@
-<div class="w-full bg-indigo px-6 md:px-20 pt-0 py-12 flex flex-col">
+---
+import { coachingPrograms } from "../data/cards";
+
+---
+
+<div class="w-full bg-indigo px-6 md:px-20 py-12 flex flex-col gap-2">
     <div class="flex flex-col gap-4">
         <span class="text-coral tracking-widest text-sm font-bold">COACHING</span>
         <h2 class="text-navy font-heading font-bold text-3xl">
             Courses built for new leaders
         </h2>
+    </div>
+
+    <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10 py-6">   
+    {coachingPrograms.map((course) => (
+        
+        <a href={course.href} class="md:h-40 flex flex-col md:justify-center gap-2 p-4 bg-white rounded-xl shadow-sm hover:border hover:border-turquoise hover:shadow-lg transition-shadow duration-300">
+                <span class={`h-1 w-8 ${course.accentColor} rounded-full`}></span>
+                <h4 class="font-heading font-bold text-base pt-2 md:text-xl">{course.title}</h4>
+                <p class="text-xs text-slate-500">{course.description}</p>
+            </a>
+    ))}
     </div>
     </div>

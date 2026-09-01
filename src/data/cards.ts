@@ -63,4 +63,10 @@ export const coachingPrograms: CoachingProgram[] = [
     href: "/coaching/executive",
     accentColor: "bg-slate-900",
   },
+   {
+    title: "Team Workshops",
+    description: "Group sessions to build shared management language across your team.",
+    href: "/coaching/team-workshops",
+    accentColor: "bg-turquoise",
+  },
 ];
