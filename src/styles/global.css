@@ -13,3 +13,7 @@
     --color-indigo: #E2EFF9;
 
 }
+
+html {
+    overflow-x: hidden
+}

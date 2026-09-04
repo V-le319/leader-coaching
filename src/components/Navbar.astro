@@ -5,14 +5,16 @@ import Login from "./Login.astro"
 
 
 ---
-<div id="navbar" class="w-full flex justify-between md:grid grid-cols-3 items-center p-4">
+<div id="navbar" class="w-full sticky top-0 z-20  bg-white/90 drop-shadow-md  flex justify-between md:grid grid-cols-3 items-center p-4"
+    data-scrolled="false">
     <Logo/>
 
         <!--desktop -->
     <div class="hidden md:flex flex-row gap-10 justify-center text-navy font-heading font-semibold text-base">
-        <a href="/#hero" class="hover:text-coral duration-300">Start Here</a>
+        <a href="/#hero" class="hover:text-coral duration-300 whitespace-nowrap">Start Here</a>
         <a href="/#cta" class="hover:text-coral duration-300">Book</a>
         <a href="/#podcast" class="hover:text-coral duration-300">Podcast</a>
+        <a href="/#guides" class="hover:text-coral duration-300">Guides</a>
         <a href="/#courses" class="hover:text-coral duration-300">Courses</a>
         <a href="/#about" class="hover:text-coral duration-300">about</a>
     </div>
@@ -39,6 +41,7 @@ import Login from "./Login.astro"
     <a href="/#hero" class="hover:text-coral duration-300">Start Here</a>
     <a href="/#cta" class="hover:text-coral duration-300">Book</a>
     <a href="/#podcast" class="hover:text-coral duration-300">Podcast</a>
+    <a href="/#guides" class="hover:text-coral duration-300">Guides</a>
     <a href="/#courses" class="hover:text-coral duration-300">Courses</a>
     <a href="/#about" class="hover:text-coral duration-300">About</a>
 
@@ -74,4 +77,11 @@ function closeMenu() {
 toggle?.addEventListener('click', openMenu);
 closeBtn?.addEventListener('click', closeMenu);
 backdrop?.addEventListener('click', closeMenu);
+
+document.addEventListener('click', (e) => {
+  if (!menu?.classList.contains('hidden') && !menu?.contains(e.target) && !toggle?.contains(e.target)) {
+    closeMenu();
+  }
+});
+
 </script>

@@ -1,21 +1,19 @@
+---
+import { episodes } from "../data/cards";
+---
 
+<div id="podcast" class="bg-indigo h-screen relative overflow-hidden w-full px-6 md:px-20 py-16 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-28">
+    <img src="/img/double triangles - middle.png" class="absolute z-10 top-0 right-0 h-32 md:h-48"/>
 
-<div class="bg-indigo h-screen relative overflow-hidden w-full px-6 md:px-20 py-16 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-28">
-    <img src="/img/double triangles - middle.png"
-            class="absolute z-10 top-0 right-0 h-32 md:h-48"/>
-    
     <div class="left-content md:sticky top-16 self-start flex flex-col gap-4 md:gap-6">
         <span class="text-coral tracking-widest text-sm font-bold">FEATURED EPISODE</span>
-        <h2 class="text-navy font-heading font-bold text-3xl">
-            The Lead Forward Podcast
-        </h2>
+        <h2 class="text-navy font-heading font-bold text-3xl">The Lead Forward Podcast</h2>
         <span></span>
 
-      
         <div class="playbox bg-white shadow-xl p-6 rounded-md flex flex-col gap-4 md:gap-6">
-            <span class="text-coral tracking-widest">Episode 118</span>
-            <h3 class="text-navy font-heading font-bold text-lg">
-                From Top Performer to First-Time Manager
+            <span id="active-episode" class="text-coral tracking-widest">{episodes[0].episode}</span>
+            <h3 id="active-title" class="text-navy font-heading font-bold text-lg">
+                {episodes[0].title}
             </h3>
             <div class="flex flex-row items-center gap-6 bg-indigo/30 p-4 rounded-md">
                 <button id="play-btn"
@@ -23,91 +21,41 @@
                     aria-label="Play episode"
                     onclick="this.classList.toggle('is-playing')"
                 >
-            <svg class="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 56 56">
-            <circle
-            id="ring-static"
-            cx="28" cy="28" r="27" fill="none"
-            stroke="var(--color-coral)" stroke-width="1"
-             />
-            <circle
-            class="play-ring hidden"
-            cx="28" cy="28" r="27" fill="none"
-            stroke="var(--color-coral)" stroke-width="1"
-            stroke-linecap="round"
-            stroke-dasharray="25 145"
-            style="filter: drop-shadow(0 0 4px var(--color-coral)) shadow(0 0 8px var(--color-coral));"
-            />
-            </svg>
-
-        <svg class="relative z-10 h-8 w-8 text-coral translate-x-0.5 play-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7z"/>
-        </svg>
-        <svg class="relative z-10 h-8 w-8 text-coral pause-icon hidden" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 5h4v14H6zM14 5h4v14h-4z"/>
-        </svg>
-            </button>
-        
-            <span class="text-navy text-sm font-medium font-body tracking-wide">Listen now - 34 min</span>
-        </div>
+                    <svg class="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 56 56">
+                        <circle id="ring-static" cx="28" cy="28" r="27" fill="none" stroke="var(--color-coral)" stroke-width="1"/>
+                        <circle class="play-ring hidden" cx="28" cy="28" r="27" fill="none" stroke="var(--color-coral)" stroke-width="1" stroke-linecap="round" stroke-dasharray="25 145" style="filter: drop-shadow(0 0 4px var(--color-coral)) shadow(0 0 8px var(--color-coral));"/>
+                    </svg>
+                    <svg class="relative z-10 h-8 w-8 text-coral translate-x-0.5 play-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="relative z-10 h-8 w-8 text-coral pause-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 5h4v14H6zM14 5h4v14h-4z"/>
+                    </svg>
+                </button>
+                <span id="active-duration" class="text-navy text-sm font-medium font-body tracking-wide">
+                    Listen now - {episodes[0].duration}
+                </span>
             </div>
-       
+        </div>
     </div>
 
     <div class="right-content h-full relative overflow-y-auto scrollbar-none mt-6 md:mt-0 flex flex-col gap-6">
-        <span class="font-heading sticky top-0 bg-indigo py-2 text-xl tracking-wide text-navy font-bold">
-            Latest Episodes</span>
+        <span class="font-heading sticky top-0 bg-indigo py-2 text-xl tracking-wide text-navy font-bold">Latest Episodes</span>
         <div class="episode-list flex flex-col">
-                <div class="flex flex-col gap-2 border border-x-0 border-y-navy/20 py-6">
-                    <span class="date text-navy/60 font-body tracking-widest text-xs uppercase">
-                        August 11, 2026</span>
-                    <span class="title text-navy font-heading font-semibold">
-                        How to Set Boundaries as a New Mangager
+            {episodes.map((ep, i) => (
+                <div
+                    class={`episode-item flex flex-col gap-2 border border-x-0 border-y-navy/20 py-6 cursor-pointer ${i > 0 ? "border-t-0" : ""}`}
+                    data-episode={ep.episode}
+                    data-title={ep.title}
+                    data-duration={ep.duration}
+                >
+                    <span class="date text-navy/60 font-body tracking-widest text-xs uppercase">{ep.episode}</span>
+                    <span class="title text-navy font-heading hover:text-coral duration-200 font-semibold">
+                        {ep.title}
                     </span>
                 </div>
-                <div class="flex flex-col gap-2 border border-x-0 border-t-0 border-b-navy/20 py-6">
-                    <span class="date text-navy/60 font-body tracking-widest text-xs uppercase">
-                        August 6, 2026</span>
-                    <span class="title text-navy font-heading font-semibold">
-                        Giving Feedback People Actually Hear
-                    </span>
-                </div>
-                <div class="flex flex-col gap-2 border border-x-0 border-t-0 border-b-navy/20 py-6">
-                    <span class="date text-navy/60 font-body tracking-widest text-xs uppercase">
-                        August 1, 2026</span>
-                    <span class="title text-navy font-heading font-semibold">
-                        Running Your first 1:1 meeting
-                    </span>
-                </div>
-                <div class="flex flex-col gap-2 border border-x-0 border-t-0 border-b-navy/20 py-6">
-                    <span class="date text-navy/60 font-body tracking-widest text-xs uppercase">
-                        July 20, 2026</span>
-                    <span class="title text-navy font-heading font-semibold">
-                        Delegating Without Loosing Control
-                    </span>
-                </div>
-                <div class="flex flex-col gap-2 border border-x-0 border-t-0 border-b-navy/20 py-6">
-                    <span class="date text-navy/60 font-body tracking-widest text-xs uppercase">
-                        July 3, 2026</span>
-                    <span class="title text-navy font-heading font-semibold">
-                        How to Set Boundaries as a New Mangager
-                    </span>
-                </div>
-                <div class="flex flex-col gap-2 border border-x-0 border-t-0 border-b-navy/20 py-6">
-                    <span class="date text-navy/60 font-body tracking-widest text-xs uppercase">
-                        July 3, 2026</span>
-                    <span class="title text-navy font-heading font-semibold">
-                        How to Set Boundaries as a New Mangager
-                    </span>
-                </div>
-                <div class="flex flex-col gap-2 border border-x-0 border-t-0 border-b-navy/20 py-6">
-                    <span class="date text-navy/60 font-body tracking-widest text-xs uppercase">
-                        July 3, 2026</span>
-                    <span class="title text-navy font-heading font-semibold">
-                        How to Set Boundaries as a New Mangager
-                    </span>
-                </div>
-</div>
- 
+            ))}
+        </div>
     </div>
 </div>
 
@@ -123,9 +71,19 @@
 </style>
 
 <script>
-    document.getElementById('play-btn')?.addEventListener('click', function () {
+    document.getElementById('podcast')?.addEventListener('click', (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        const item = target.closest('.episode-item') as HTMLElement | null;
+        if (!item) return;
+
+        document.getElementById('active-episode')!.textContent = item.dataset.episode!;
+        document.getElementById('active-title')!.textContent = item.dataset.title!;
+        document.getElementById('active-duration')!.textContent = `Listen now - ${item.dataset.duration}`;
+    });
+
+    document.getElementById('play-btn')?.addEventListener('click', function (this: HTMLElement) {
         const isPlaying = this.classList.contains('is-playing');
-        this.querySelector('.ring-static, #ring-static')?.classList.toggle('hidden', isPlaying);
+        this.querySelector('#ring-static')?.classList.toggle('hidden', isPlaying);
         this.querySelector('.play-ring')?.classList.toggle('hidden', !isPlaying);
         this.querySelector('.play-icon')?.classList.toggle('hidden', isPlaying);
         this.querySelector('.pause-icon')?.classList.toggle('hidden', !isPlaying);
