@@ -5,15 +5,15 @@ const guides = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/guides" }),
   schema: z.object({
     title: z.string(),
-    dek: z.string(),
-    eyebrow: z.string(),
-    author: z.string(),
-    authorBio: z.string(),
-    readTime: z.string(),
-    updatedDate: z.string(),
-    heroGradient: z.enum(["warm", "cool"]),
+    description: z.string(),
     image: z.string(),
-    related: z.array(z.string()).optional(),
+    labelBg: z.string(),
+    order: z.number(),
+    eyebrow: z.string().optional(),
+    author: z.string().optional(),
+    authorBio: z.string().optional(),
+    readTime: z.string().optional(),
+    updatedDate: z.string().optional(),
   }),
 });
 
@@ -21,10 +21,9 @@ const courses = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/courses" }),
   schema: z.object({
     title: z.string(),
-    dek: z.string(),
+    description: z.string(),
     accentColor: z.string(),
-    days: z.number().optional(),
-    updatedDate: z.string(),
+    order: z.number(),
   }),
 });
 

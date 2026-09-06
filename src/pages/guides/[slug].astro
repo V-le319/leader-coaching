@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from "astro:content";
+import  Layout  from "../../layouts/Layout.astro";
+import  Navbar  from "../../components/Navbar.astro";
+
+export async function getStaticPaths() {
+  const guides = await getCollection("guides");
+  return guides.map((guide) => ({
+    params: { slug: guide.id },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+---
+
+<Layout>
+    <Navbar/>
+
+    <main>
+      <div class="wrap article-head">
+        <span class="eyebrow">{guide.data.eyebrow}</span>
+        <h1 class="title">{guide.data.title}</h1>
+        <p class="dek">{guide.data.description}</p>
+        <div class="meta-row">
+          <span>{guide.data.author}</span>
+          <span>{guide.data.readTime}</span>
+          <span>Updated {guide.data.updatedDate}</span>
+        </div>
+      </div>
+
+      <img src={guide.data.image} alt={guide.data.title} class="wrap hero-art" />
+
+      <article class="wrap body">
+        <Content />
+      </article>
+    </main>
+</Layout>
