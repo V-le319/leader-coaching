@@ -1,0 +1,27 @@
+---
+interface Props {
+  heading?: string;
+  subtext?: string;
+  buttonText?: string;
+  buttonHref?: string;
+}
+const {
+  heading = "Ready to lead with confidence?",
+  subtext = "Get a 45-minute call with a coach and leave with a clear plan for your next role.",
+  buttonText = "Book my free call",
+  buttonHref = "/book",
+} = Astro.props;
+---
+
+<div class="relative bg-indigo w-full overflow-hidden py-28 px-6 md:px-20">
+  <div class="absolute top-0 right-16 w-0 h-0 border-t-90 border-r-90 border-t-transparent border-r-turquoise opacity-50"></div>
+  <div class="absolute bottom-0 right-32 w-0 h-0 border-b-70 border-l-70 border-b-yellow-400 border-l-transparent opacity-70"></div>
+
+  <div class="relative z-10 text-center flex flex-col items-center gap-4 max-w-2xl mx-auto">
+    <h2 class="font-heading text-navy font-extrabold text-3xl">{heading}</h2>
+    <p class="text-slate-500 text-base">{subtext}</p>
+    <a href={buttonHref} class="bg-navy hover:bg-turquoise mt-2 text-white font-bold text-sm px-8 py-4 rounded-md duration-200">
+      {buttonText}
+    </a>
+  </div>
+</div>

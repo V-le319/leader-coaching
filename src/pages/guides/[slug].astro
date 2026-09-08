@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
+import RelatedGuides from "../../components/RelatedGuides.astro";
+import FinalCta from "../../components/FinalCta.astro";
 
 export async function getStaticPaths() {
   const guides = await getCollection("guides");
@@ -14,7 +16,6 @@ export async function getStaticPaths() {
 
 const { guide } = Astro.props;
 
-// turn each section heading into a URL-safe id for anchor links
 const slugify = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 ---
@@ -22,118 +23,159 @@ const slugify = (text: string) =>
 <Layout>
     <Navbar/>
 
-    <main class="h-full w-full px-4 md:px-36 py-8  flex flex-col gap-6 md:gap-8">
+    <main class="h-full w-full px-4 md:px-36 py-8 flex flex-col gap-6 md:gap-8">
       <div class="flex flex-row items-center gap-4 md:gap-6 text-sm font-body text-slate-500">
-        <a href=""
-            class="border-r pr-4 border-r-slate-500 hover:text-coral duration-200">Resources</a>
-        <a href=""
-            class="border-r pr-4 border-r-slate-500  hover:text-coral duration-200">Guides</a>
-        <a href=""
-            class=" hover:text-coral duration-200">First-Time Manager's Guide</a>
+        <a href="" class="border-r pr-4 border-r-slate-500 hover:text-coral duration-200">Resources</a>
+        <a href="" class="border-r pr-4 border-r-slate-500 hover:text-coral duration-200">Guides</a>
+        <a href="" class="hover:text-coral duration-200">{guide.data.title}</a>
       </div>
 
       <div class="flex flex-col gap-4 md:gap-8">
         <span class="font-body font-semibold tracking-widest text-sm text-coral">
-          FEATURED GUIDE</span>
-        <h1 class="font-heading text-ink text-5xl md:text-6xl font-bold leading-14">
-          {guide.data.title}</h1>
+          {guide.data.eyebrow}
+        </span>
+        <h1 class="font-heading text-ink text-4xl md:text-6xl font-bold leading-14">
+          {guide.data.title}
+        </h1>
         <span class="font-heading text-2xl italic font-medium text-navy">
           {guide.data.description}
         </span>
       </div>
 
       <div class="w-full flex flex-col md:flex-row md:items-center md:gap-10 gap-4">
-        <div class="flex flex-row gap-10 items-center">
+        <div class="flex flex-row gap-6 md:gap-10 items-center">
           <div class="flex flex-row gap-4 items-center">
-           <img src="/img/jake-nackos-IF9TK5Uy-KI-unsplash.jpg"
-                class="h-11 w-11 object-cover shrink-0 rounded-full border border-navy"/>
-          <div class="flex flex-col gap-1">
-            <span class="text-base font-semibold text-ink">
-              Written by {guide.data.author}</span>
-            <span class="text-base font-body text-slate-500">Lead Forward Coaching Team</span>
+            <img src="/img/jake-nackos-IF9TK5Uy-KI-unsplash.jpg"
+                 class="h-11 w-11 object-cover shrink-0 rounded-full border border-navy"/>
+            <div class="flex flex-col gap-1">
+              <span class="text-base font-semibold text-ink">Written by {guide.data.author}</span>
+              <span class="text-base font-body text-slate-500">Lead Forward Coaching Team</span>
+            </div>
           </div>
-          </div>
-          <span class="text-base font-body text-slate-500">
-          •{guide.data.readTime}•</span>
+          <span class="text-base font-body text-slate-500">• {guide.data.readTime}</span>
         </div>
-
         <span class="text-base font-body pl-16 md:pl-0 text-slate-500">
-          Updated {guide.data.updatedDate}</span>
-
+          Updated {guide.data.updatedDate}
+        </span>
       </div>
 
       <div class="w-full h-64 md:h-96 rounded-xl overflow-hidden relative mt-4 md:mt-8">
-      <img src={guide.data.image} alt={guide.data.title} class="w-full h-full object-cover" />
-    </div>
-
-    <div class="w-full grid grid-cols-1 md:grid-cols-[1fr_320px] gap-10 md:gap-16 mt-4 md:mt-8">
-
-      <div class="flex flex-col gap-8 w-full">
-
-        {guide.data.whoFor && (
-          <div class="bg-indigo/90 border-l-4 border-turquoise rounded-md px-7 py-6 max-w-[70ch]">
-            <span class="block font-body font-bold text-sm tracking-wide text-turquoise mb-2">
-              WHO THIS IS FOR
-            </span>
-            <p class="text-base text-navy">{guide.data.whoFor}</p>
-          </div>
-        )}
-
-        {guide.data.sections?.map((section, i) => (
-          <div id={slugify(section.heading)} class="flex flex-col gap-4 max-w-[90ch]">
-            <h2 class="font-heading text-navy font-extrabold text-2xl mt-4">
-              {section.heading}
-            </h2>
-            <p class="font-body tracking-wide text-base md:text-lg leading-7 md:leading-7.5 text-ink">
-              {section.body}
-            </p>
-
-            {/* drop the pullquote after the first section, matching original layout */}
-            {i === 0 && guide.data.pullQuote && (
-              <blockquote class="font-heading italic font-medium text-2xl md:text-3xl text-navy
-                border-t-2 border-b-2 border-navy py-6 md:py-8">
-                "{guide.data.pullQuote}"
-              </blockquote>
-            )}
-          </div>
-        ))}
-
-        {guide.data.mistakes && guide.data.mistakes.length > 0 && (
-          <div class="flex flex-col gap-4 max-w-[70ch]">
-            <h2 class="font-heading text-navy font-extrabold text-2xl">
-              Common first-year mistakes
-            </h2>
-            <ul class="pl-5 flex flex-col gap-2">
-              {guide.data.mistakes.map((mistake) => (
-                <li class="font-body text-base md:text-lg tracking-wide leading-[1.7] text-ink list-disc">
-                  {mistake}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
+        <img src={guide.data.image} alt={guide.data.title} class="w-full h-full object-cover" />
       </div>
 
-      <aside class="hidden md:block sticky top-32 h-fit">
-        <span class="block font-body font-bold text-sm tracking-[0.06em] text-slate-500 mb-3.5">
-          ON THIS PAGE
-        </span>
-        <ol class="border-l-2 border-slate-200 flex flex-col">
-          {guide.data.sections?.map((section) => (
-            <li>
-              <a href={`#${slugify(section.heading)}`}
-                 class="block pl-4 py-2 text-sm text-slate-500 hover:text-coral border-l-2 border-transparent hover:border-turquoise -ml-0.5">
+      <div class="w-full grid grid-cols-1 md:grid-cols-[1fr_320px] gap-10 md:gap-16 mt-4 md:mt-8">
+
+        <div class="flex flex-col gap-8 w-full">
+          {guide.data.intro?.map((paragraph) => (
+  <p class="font-body text-base md:text-lg leading-7 md:leading-7.5 text-ink">
+    {paragraph}
+  </p>
+))}
+
+          {guide.data.whoFor && (
+            <div class="bg-indigo/90 border-l-4 border-turquoise rounded-md px-7 py-6 max-w-[70ch]">
+              <span class="block font-body font-bold text-sm tracking-wide text-turquoise mb-2">
+                WHO THIS IS FOR
+              </span>
+              <p class="text-base text-navy">{guide.data.whoFor}</p>
+            </div>
+          )}
+
+          {guide.data.sections?.map((section, i) => (
+            <div id={slugify(section.heading)} class="flex flex-col gap-4 md:gap-6 max-w-[90ch]">
+              <h2 class="font-heading text-navy font-extrabold text-2xl mt-4">
                 {section.heading}
-              </a>
-            </li>
+              </h2>
+
+              {section.body && (
+                <p class="font-body tracking-wide text-base md:text-lg leading-7 md:leading-7.5 text-ink">
+                  {section.body}
+                </p>
+              )}
+
+              {section.steps && (
+                <div class="flex flex-col gap-6 mt-2">
+                  {section.steps.map((step, idx) => (
+                    <div class="flex gap-4 items-start">
+                      <div class="shrink-0 w-9 h-9 rounded-full bg-navy text-white flex items-center justify-center font-bold text-sm">
+                        {idx + 1}
+                      </div>
+                      <div class="flex flex-col gap-1.5">
+                        <h3 class="font-heading font-bold text-lg text-navy">{step.title}</h3>
+                        <p class="font-body text-base md:text-lg leading-7 text-ink">{step.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {i === 0 && guide.data.pullQuote && (
+                <blockquote class="font-heading italic font-medium text-2xl md:text-3xl text-navy
+                  border-t-2 border-b-2 border-navy py-6 md:py-8">
+                  "{guide.data.pullQuote}"
+                </blockquote>
+              )}
+            </div>
           ))}
-        </ol>
-      </aside>
 
-    </div>
+          {guide.data.mistakes && guide.data.mistakes.length > 0 && (
+            <div class="bg-navy rounded-xl p-8 md:p-10 my-4 md:my-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="flex flex-col gap-2">
+              <h3 class="text-white text-xl font-bold">Want to talk through your specific team?</h3>
+              <p class="text-slate-200 text-base max-w-md">
+                Get a free 45-minute call with a coach and leave with a plan for your first 90 days.
+              </p>
+            </div>
+            <a href="/book" class="shrink-0 w-full md:w-fit text-center  bg-turquoise text-white font-bold text-sm px-6 py-3 rounded-md hover:bg-coral duration-200">
+              Book my free call
+            </a>
+          </div>
+            <div class="flex flex-col gap-6 max-w-[70ch]">
+              <h2 class="font-heading text-navy font-extrabold text-2xl">
+                Common first-year mistakes
+              </h2>
+              <ul class="pl-5 flex flex-col gap-2">
+                {guide.data.mistakes.map((mistake) => (
+                  <li class="font-body text-base md:text-lg tracking-wide leading-[1.7] text-ink list-disc">
+                    {mistake}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-  </main>
+          
 
-  <Footer />
+        </div>
+
+        <aside class="hidden md:block sticky top-32 h-fit">
+          <span class="block font-body font-bold text-sm tracking-[0.06em] text-slate-500 mb-3.5">
+            ON THIS PAGE
+          </span>
+          <ol class="border-l-2 border-slate-200 flex flex-col">
+            {guide.data.sections?.map((section) => (
+              <li>
+                <a href={`#${slugify(section.heading)}`}
+                   class="block pl-4 py-2 text-sm text-slate-500 hover:text-coral border-l-2 border-transparent hover:border-turquoise -ml-0.5">
+                  {section.heading}
+                </a>
+              </li>
+            ))}
+            {guide.data.mistakes && guide.data.mistakes.length > 0 && (
+              <li>
+                <a href="#mistakes"
+                   class="block pl-4 py-2 text-sm text-slate-500 hover:text-coral border-l-2 border-transparent hover:border-turquoise -ml-0.5">
+                  Common first-year mistakes
+                </a>
+              </li>
+            )}
+          </ol>
+        </aside>
+      </div>
+      <div class="h-px mt-2 bg-slate-500/50"></div>
+      <RelatedGuides currentSlug={guide.id} />
+    </main>
+      <FinalCta />
+
+    <Footer />
 </Layout>

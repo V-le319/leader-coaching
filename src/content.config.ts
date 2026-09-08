@@ -14,13 +14,18 @@ const guides = defineCollection({
     authorBio: z.string().optional(),
     readTime: z.string().optional(),
     updatedDate: z.string().optional(),
+    intro: z.array(z.string()).optional(),
     whoFor: z.string().optional(),
     pullQuote: z.string().optional(),
     sections: z.array(z.object({
       heading: z.string(),
-      body: z.string(),
+      body: z.string().optional(),
+      steps: z.array(z.object({
+        title: z.string(),
+        text: z.string(),
+      })).optional(),
     })).optional(),
-    mistakes: z.array(z.string()).optional(), // for bullet-list sections like "Common mistakes"
+    mistakes: z.array(z.string()).optional(),
   }),
 });
 
