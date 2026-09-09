@@ -27,10 +27,10 @@ sections:
         text: "If the first time someone hears about a problem is at their performance review, that's a failure of timing, not of the feedback itself. Say the small thing early, while it's still small."
       - title: "Deciding without full consensus"
         text: "Part of the job is making calls when the team disagrees. Ask for input, set a deadline for the decision, and be honest when it's your call to make rather than a group vote."
+  - heading: "Your first two weeks, in order"
+    body: "Skip the urge to change everything immediately. Spend the first two weeks doing three things: meet each person on your team 1:1 to understand how they like to work, learn what \"good\" already looks like on this team before you try to improve it, and agree on how you and your own manager will communicate. Everything else can wait a little longer."
 mistakes:
   - "Managing everyone the same way. A new hire and a ten-year veteran need different amounts of guidance — treating them identically under-supports one and micromanages the other."
   - "Avoiding hard conversations to stay liked. The discomfort doesn't go away; it just gets bigger and harder to raise later."
   - "Confusing being busy with being effective. A full calendar isn't the same as a team that's unblocked and growing."
-  - heading: "Your first two weeks, in order"
-    body: "Skip the urge to change everything immediately. Spend the first two weeks doing three things: meet each person on your team 1:1 to understand how they like to work, learn what \"good\" already looks like on this team before you try to improve it, and agree on how you and your own manager will communicate. Everything else can wait a little longer."
 ---

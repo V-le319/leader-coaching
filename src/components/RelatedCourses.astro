@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+
+interface Props {
+  currentSlug: string;
+}
+const { currentSlug } = Astro.props;
+
+const allCourses = (await getCollection("courses"))
+  .filter((c) => c.id !== currentSlug)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+
+{allCourses.length > 0 && (
+  <div class="flex flex-col gap-6 my-4 md:my-10">
+    <div class="flex items-center justify-between">
+      <h2 class="font-heading text-navy font-extrabold text-2xl">Other programs to consider</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 my-4">
+      {allCourses.map((course) => (
+        <a href={`/courses/${course.id}`} class="flex flex-col gap-3 group shadow-md hover:-translate-y-1 hover:scale-[1.02] duration-200">
+          <div class={`h-40 w-full rounded-lg ${course.data.accentColor}`}></div>
+          <div class="relative flex-1 p-4 pb-8 min-w-0">
+            <h3 class="font-heading font-extrabold text-sm uppercase tracking-wide">{course.data.title}</h3>
+            <p class="text-sm text-slate-500">{course.data.description}</p>
+            <div class="absolute inset-x-0 bottom-0 bg-navy text-white text-sm font-semibold px-6 py-3 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+              Learn More
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+)}

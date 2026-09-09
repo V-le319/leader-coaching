@@ -1,0 +1,201 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import FinalCta from "../../components/FinalCta.astro";
+import RelatedCourses from "../../components/RelatedCourses.astro"
+
+export async function getStaticPaths() {
+  const courses = await getCollection("courses");
+  return courses.map((course) => ({
+    params: { slug: course.id },
+    props: { course },
+  }));
+}
+
+const { course } = Astro.props;
+---
+
+<Layout>
+  <Navbar/>
+
+  <main class="h-full w-full px-4 md:px-36 py-8 flex flex-col gap-6 md:gap-8">
+
+    <div class="flex flex-row items-center gap-4 md:gap-6 text-sm font-body text-slate-500">
+      <a href="" class="border-r pr-4 border-r-slate-500 hover:text-coral duration-200">Coaching</a>
+      <a href="" class="hover:text-coral duration-200">{course.data.title}</a>
+    </div>
+
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+      <div class="flex flex-col gap-4 md:gap-6">
+        <span class="font-body font-semibold tracking-widest text-sm text-coral">COURSE</span>
+        <h1 class="font-heading text-ink text-4xl md:text-5xl font-bold leading-tight">
+          {course.data.title}
+        </h1>
+        <p class="font-heading text-xl italic font-medium text-navy">
+          {course.data.dek}
+        </p>
+
+        <div class="flex flex-wrap gap-6 md:gap-8 py-2">
+          {course.data.duration && (
+            <div class="flex flex-col">
+              <span class="font-bold text-base text-ink">{course.data.duration}</span>
+              <span class="text-sm text-slate-500">{course.data.format}</span>
+            </div>
+          )}
+          {course.data.studentCount && (
+            <div class="flex flex-col">
+              <span class="font-bold text-base text-ink">{course.data.studentCount}</span>
+              <span class="text-sm text-slate-500">managers trained</span>
+            </div>
+          )}
+        </div>
+
+        <div class="flex items-center gap-4 flex-wrap">
+          <a href="#pricing" class="bg-navy text-white font-bold text-sm px-8 py-4 rounded-md hover:bg-turquoise duration-200">
+            {course.data.price ? `Enroll now — $${course.data.price}` : "Enroll now"}
+          </a>
+          {course.data.priceInstallments && (
+            <span class="text-sm text-slate-500">or <b class="text-ink">{course.data.priceInstallments}</b></span>
+          )}
+        </div>
+      </div>
+
+      <div class={`h-72 md:h-96 rounded-xl ${course.data.accentColor}`}></div>
+    </div>
+
+    {course.data.outcomes && course.data.outcomes.length > 0 && (
+      <div class="flex flex-col gap-6 py-8">
+        <h2 class="font-heading text-navy font-extrabold text-2xl">What you'll walk away with</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {course.data.outcomes.map((outcome) => (
+            <div class="flex gap-3 items-start">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-teal-light text-turquoise flex items-center justify-center font-bold text-sm">✓</span>
+              <p class="font-body text-base text-ink leading-relaxed">{outcome}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {course.data.modules && course.data.modules.length > 0 && (
+      <div class="flex flex-col gap-6 py-8">
+        <h2 class="font-heading text-navy font-extrabold text-2xl">Inside the program</h2>
+        <div class="bg-teal-light rounded-xl overflow-hidden">
+          {course.data.modules.map((module, idx) => (
+            <div class="flex gap-5 p-6 md:p-7 border-b border-turquoise/20 last:border-b-0">
+              <div class="shrink-0 w-9 h-9 rounded-full bg-navy text-white flex items-center justify-center font-bold text-sm">
+                {idx + 1}
+              </div>
+              <div class="flex flex-col gap-1">
+                <h3 class="font-heading font-bold text-lg text-navy">{module.title}</h3>
+                <p class="font-body text-sm text-slate-600 leading-relaxed">{module.description}</p>
+                <span class="text-xs font-bold text-turquoise mt-1">{module.length}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {(course.data.forYou || course.data.notForYou) && (
+      <div class="flex flex-col gap-6 py-8">
+        <h2 class="font-heading text-navy font-extrabold text-2xl">Is this for you?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {course.data.forYou && (
+            <div class="flex flex-col gap-3">
+              <h3 class="font-heading font-bold text-base text-turquoise">This is for you if</h3>
+              <ul class="pl-5 flex flex-col gap-2">
+                {course.data.forYou.map((item) => (
+                  <li class="font-body text-base text-ink leading-relaxed list-disc">{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {course.data.notForYou && (
+            <div class="flex flex-col gap-3">
+              <h3 class="font-heading font-bold text-base text-coral">This isn't for you if</h3>
+              <ul class="pl-5 flex flex-col gap-2">
+                {course.data.notForYou.map((item) => (
+                  <li class="font-body text-base text-ink leading-relaxed list-disc">{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+
+    {course.data.testimonialQuote && (
+      <div class="bg-navy rounded-xl p-10 md:p-14 text-center flex flex-col items-center gap-4 my-4">
+        <p class="font-heading italic font-medium text-xl md:text-2xl text-white max-w-2xl">
+          "{course.data.testimonialQuote}"
+        </p>
+        {course.data.testimonialAuthor && (
+          <span class="text-sm font-semibold text-slate-300">— {course.data.testimonialAuthor}</span>
+        )}
+      </div>
+    )}
+
+    {course.data.instructorName && (
+      <div class="flex gap-5 items-start py-8">
+        <img src="/img/jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="w-16 h-16 rounded-full object-cover shrink-0" />
+        <div class="flex flex-col gap-1">
+          <h4 class="font-heading font-bold text-base">{course.data.instructorName}</h4>
+          <p class="font-body text-sm text-slate-500 leading-relaxed max-w-xl">{course.data.instructorBio}</p>
+        </div>
+      </div>
+    )}
+
+    <div id="pricing" class="bg-teal-light rounded-xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div class="flex flex-col gap-2">
+        <h3 class="font-heading font-extrabold text-2xl text-navy">Ready to get started?</h3>
+        <p class="font-body text-base text-slate-600 max-w-md">
+          {course.data.description}
+        </p>
+      </div>
+      <div class="flex flex-col items-start md:items-end gap-3 shrink-0">
+        {course.data.price && (
+          <span class="font-heading font-extrabold text-3xl text-navy">
+            ${course.data.price} <span class="text-sm font-semibold text-slate-500">one-time</span>
+          </span>
+        )}
+        <a href="/#cta" class="w-full md:w-fit text-center bg-navy text-white font-bold text-sm px-8 py-4 rounded-md hover:bg-turquoise duration-200">
+          Enroll now
+        </a>
+        {course.data.guarantee && (
+          <span class="text-xs font-bold text-turquoise">{course.data.guarantee}</span>
+        )}
+      </div>
+    </div>
+
+    {course.data.faq && course.data.faq.length > 0 && (
+      <div class="flex flex-col gap-4 py-8">
+        <h2 class="font-heading text-navy font-extrabold text-2xl">Common questions</h2>
+        {course.data.faq.map((item) => (
+          <details class="border-b border-slate-200 py-5 group">
+            <summary class="flex items-center justify-between cursor-pointer list-none font-heading font-bold text-base text-ink">
+              {item.question}
+              <span class="text-slate-400 text-xl group-open:hidden">+</span>
+              <span class="text-slate-400 text-xl hidden group-open:inline">–</span>
+            </summary>
+            <p class="font-body text-base text-slate-600 leading-relaxed mt-3">{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    )}
+
+    <div class="h-px mt-2 bg-slate-500/50"></div>
+      <RelatedCourses currentSlug={course.id} />
+
+  </main>
+
+  <FinalCta
+    heading="Your team is waiting on you to figure this out"
+    subtext="Join the next cohort and leave with a real plan for your first 90 days."
+    buttonText="Enroll now"
+  />
+
+  <Footer/>
+</Layout>

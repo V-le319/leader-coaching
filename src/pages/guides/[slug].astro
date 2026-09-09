@@ -30,7 +30,7 @@ const slugify = (text: string) =>
         <a href="" class="hover:text-coral duration-200">{guide.data.title}</a>
       </div>
 
-      <div class="flex flex-col gap-4 md:gap-8">
+      <div class="flex flex-col gap-2 md:gap-8">
         <span class="font-body font-semibold tracking-widest text-sm text-coral">
           {guide.data.eyebrow}
         </span>
@@ -82,7 +82,7 @@ const slugify = (text: string) =>
           )}
 
           {guide.data.sections?.map((section, i) => (
-            <div id={slugify(section.heading)} class="flex flex-col gap-4 md:gap-6 max-w-[90ch]">
+            <div id={slugify(section.heading)} class="flex flex-col gap-4 md:gap-6 max-w-[85ch]">
               <h2 class="font-heading text-navy font-extrabold text-2xl mt-4">
                 {section.heading}
               </h2>
@@ -118,31 +118,32 @@ const slugify = (text: string) =>
             </div>
           ))}
 
-          {guide.data.mistakes && guide.data.mistakes.length > 0 && (
-            <div class="bg-navy rounded-xl p-8 md:p-10 my-4 md:my-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div class="flex flex-col gap-2">
-              <h3 class="text-white text-xl font-bold">Want to talk through your specific team?</h3>
-              <p class="text-slate-200 text-base max-w-md">
-                Get a free 45-minute call with a coach and leave with a plan for your first 90 days.
-              </p>
-            </div>
-            <a href="/book" class="shrink-0 w-full md:w-fit text-center  bg-turquoise text-white font-bold text-sm px-6 py-3 rounded-md hover:bg-coral duration-200">
-              Book my free call
-            </a>
-          </div>
-            <div class="flex flex-col gap-6 max-w-[70ch]">
-              <h2 class="font-heading text-navy font-extrabold text-2xl">
-                Common first-year mistakes
-              </h2>
-              <ul class="pl-5 flex flex-col gap-2">
-                {guide.data.mistakes.map((mistake) => (
-                  <li class="font-body text-base md:text-lg tracking-wide leading-[1.7] text-ink list-disc">
-                    {mistake}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <div class="bg-navy rounded-xl p-8 md:p-10 my-4 md:my-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+  <div class="flex flex-col gap-2">
+    <h3 class="text-white text-xl font-bold">Want to talk through your specific team?</h3>
+    <p class="text-slate-200 text-base max-w-md">
+      Get a free 45-minute call with a coach and leave with a plan for your first 90 days.
+    </p>
+  </div>
+  <a href="/#cta" class="shrink-0 w-full md:w-fit text-center bg-turquoise text-white font-bold text-sm px-6 py-3 rounded-md hover:bg-coral duration-200">
+    Book my free call
+  </a>
+</div>
+
+{guide.data.mistakes && guide.data.mistakes.length > 0 && (
+  <div id="mistakes" class="flex flex-col gap-6 max-w-[70ch]">
+    <h2 class="font-heading text-navy font-extrabold text-2xl">
+      Common first-year mistakes
+    </h2>
+    <ul class="pl-5 flex flex-col gap-2">
+      {guide.data.mistakes.map((mistake) => (
+        <li class="font-body text-base md:text-lg tracking-wide leading-[1.7] text-ink list-disc">
+          {mistake}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
 
           
 
