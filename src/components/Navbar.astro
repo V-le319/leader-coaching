@@ -5,12 +5,12 @@ import Login from "./Login.astro"
 
 
 ---
-<div id="navbar" class="w-full sticky top-0 z-20  bg-white/90 drop-shadow-md  flex justify-between md:grid grid-cols-3 items-center p-4"
+<div id="navbar" class="w-full sticky top-0 z-20 bg-white/90 drop-shadow-md flex justify-between lg:grid grid-cols-3 items-center p-4"
     data-scrolled="false">
     <Logo/>
 
         <!--desktop -->
-    <div class="hidden md:flex flex-row gap-10 justify-center text-navy font-heading font-semibold text-base">
+    <div class="hidden lg:flex flex-row gap-10 justify-center text-navy font-heading font-semibold text-base">
         <a href="/#hero" class="hover:text-coral duration-300 whitespace-nowrap">Start Here</a>
         <a href="/#cta" class="hover:text-coral duration-300">Book</a>
         <a href="/#podcast" class="hover:text-coral duration-300">Podcast</a>
@@ -19,13 +19,13 @@ import Login from "./Login.astro"
         <a href="/#about" class="hover:text-coral duration-300">about</a>
     </div>
 
-    <div class="hidden md:flex justify-end">
+    <div class="hidden lg:flex justify-end">
         <Login/>
     </div>
 
         
         <!--mobile -->
-<button id="menu-toggle" class="md:hidden text-2xl z-30 relative">
+<button id="menu-toggle" class="lg:hidden text-2xl z-30 relative">
    <span id="menu-icon">☰</span>
 </button>
 

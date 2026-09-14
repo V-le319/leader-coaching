@@ -23,7 +23,7 @@ const slugify = (text: string) =>
 <Layout>
     <Navbar/>
 
-    <main class="h-full w-full px-4 md:px-36 py-8 flex flex-col gap-6 md:gap-8">
+    <main class="h-full w-full px-4 md:px-20 lg:px-36 py-8 flex flex-col gap-6 md:gap-8">
       <div class="flex flex-row items-center gap-4 md:gap-6 text-sm font-body text-slate-500">
         <a href="" class="border-r pr-4 border-r-slate-500 hover:text-coral duration-200">Resources</a>
         <a href="" class="border-r pr-4 border-r-slate-500 hover:text-coral duration-200">Guides</a>
@@ -63,7 +63,7 @@ const slugify = (text: string) =>
         <img src={guide.data.image} alt={guide.data.title} class="w-full h-full object-cover" />
       </div>
 
-      <div class="w-full grid grid-cols-1 md:grid-cols-[1fr_320px] gap-10 md:gap-16 mt-4 md:mt-8">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 lg:gap-16 mt-4 md:mt-8">
 
         <div class="flex flex-col gap-8 w-full">
           {guide.data.intro?.map((paragraph) => (

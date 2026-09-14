@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 const allGuides = (await getCollection("guides")).sort((a, b) => a.data.order - b.data.order);
 const [featured, ...rest] = allGuides;
 ---
-<div id="guides" class="w-full bg-white px-6 md:px-20 py-10 md:py-16 flex flex-col">
+<div id="guides" class="w-full bg-white px-6 md:px-14 lg:px-20 py-10 md:py-16 flex flex-col">
     <div class="flex flex-col gap-4">
         <span class="text-coral tracking-widest text-sm font-bold">RESOURCES</span>
         <h2 class="text-navy font-heading font-bold text-3xl">
