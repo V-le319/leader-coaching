@@ -62,7 +62,10 @@ const { course } = Astro.props;
         </div>
       </div>
 
-      <div class={`h-72 md:h-96 rounded-xl ${course.data.accentColor}`}></div>
+     <img src={course.data.image}
+          alt={course.data.title}
+          class="h-72 md:h-96 rounded-xl object-cover"
+          />
     </div>
 
     {course.data.outcomes && course.data.outcomes.length > 0 && (

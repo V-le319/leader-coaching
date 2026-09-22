@@ -1,6 +1,7 @@
 ---
 title: "Executive Coaching"
 description: "For leaders managing managers."
+image: "/img/mwitt1337-meeting-2284501_1920.jpg"
 accentColor: "bg-slate-900"
 order: 2
 dek: "For leaders managing managers — the challenges change once your team leads teams of their own."

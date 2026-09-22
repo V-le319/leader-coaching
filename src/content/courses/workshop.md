@@ -1,6 +1,7 @@
 ---
 title: "Team Workshops"
 description: "Group sessions to build shared management language across your team."
+image: "/img/sable-flow-o-6GhmpELnw-unsplash.jpg"
 accentColor: "bg-turquoise"
 order: 3
 dek: "Group sessions to build shared management language across your team — so everyone's working from the same playbook."

@@ -1,6 +1,7 @@
 ---
 title: "Signature Coaching"
 description: "Ongoing 1:1 coaching built around your goals."
+image: "/img/stocksnap-happy-holidays-2567915_1920.jpg"
 accentColor: "bg-amber-400"
 order: 1
 dek: "Ongoing 1:1 coaching built around your goals — not a fixed curriculum, but a coach in your corner."

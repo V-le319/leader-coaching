@@ -1,6 +1,7 @@
 ---
 title: "New Manager Bootcamp"
 description: "The essentials for your first 90 days leading a team."
+image: "/img/tungart7-business-8941862_1920.jpg"
 accentColor: "bg-red-500"
 order: 0
 dek: "The essentials for your first 90 days leading a team — before the mistakes get expensive."
